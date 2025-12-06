@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asztalfoglalás</title>
+    <meta name="description" content="Foglalj asztalt egyszerűen és gyorsan a Chill & Sip kávézóban. Várunk szeretettel!">
+    <link rel="icon" type="image/png" href="Képek/Kezdőlap/Logó.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="foglalas">
+    <nav class="navbar">
+        <ul>
+            <li><a href="kezdolap.html">Kezdőlap</a></li>
+            <li><a href="itallap.html">Itallap</a></li>
+            <li><a href="rolunk.html">Rólunk</a></li>
+            <li><a class="aktiv" href="foglalas.html">Asztalfoglalás</a></li>
+            <li><a href="kapcsolat.html">Kapcsolat</a></li>
+            <li><a href="gyik.html">GYIK</a></li>
+        </ul>
+    </nav>
+
+    <main class="foglalas-container">
+        <h1>Asztalfoglalás</h1>
+        <p class="foglalas-bevezeto">
+            Foglalj asztalt a Chill & Sip-ben pár kattintással! Töltsd ki az alábbi űrlapot,
+            és e-mailben visszaigazoljuk a foglalásodat.
+        </p>
+
+        <form id="foglalas-form">
+            <div class="urlap-grid">
+                <div class="mezo-blokk">
+                    <label for="nev">Név*</label>
+                    <input type="text" id="nev" name="nev" required>
+                </div>
+
+                <div class="mezo-blokk">
+                    <label for="email">E-mail cím*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="mezo-blokk">
+                    <label for="telefon">Telefonszám</label>
+                    <input type="tel" id="telefon" name="telefon" placeholder="+36...">
+                </div>
+
+                <div class="mezo-blokk">
+                    <label for="datum">Dátum*</label>
+                    <input type="date" id="datum" name="datum" required>
+                </div>
+
+                <div class="mezo-blokk">
+                    <label for="ido">Időpont*</label>
+                    <input type="time" id="ido" name="ido" required>
+                </div>
+
+                <div class="mezo-blokk">
+                    <label for="letszam">Létszám*</label>
+                    <input type="number" id="letszam" name="letszam" min="1" max="20" required>
+                </div>
+            </div>
+
+            <div class="mezo-blokk hosszabb">
+                <label for="uzenet">Megjegyzés (ételallergia, külön kérés, stb.)</label>
+                <textarea id="uzenet" name="uzenet" rows="4"></textarea>
+            </div>
+
+            <div class="feltetelek-sor">
+                <input type="checkbox" id="aszf" required>
+                <label for="aszf">Elfogadom a felhasználási feltételeket</label>
+            </div>
+
+            <button type="submit" id="foglalas-gomb">Foglalás elküldése</button>
+
+            <div id="foglalas-eredmeny"></div>
+        </form>
+    </main>
+
+    <footer class="lablec">
+        <p>© 2025 Chill & Sip | Készítette: Kovács Réka</p>
+        <p>Kávé, jó hangulat és laza pillanatok, minden nap!</p>
+    </footer>
+
+    <script>
+        document.getElementById("foglalas-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let hibas = false;
+
+            const nev = document.getElementById("nev");
+            const email = document.getElementById("email");
+            const telefonszam = document.getElementById("telefon");
+            const datum = document.getElementById("datum");
+            const ido = document.getElementById("ido");
+            const letszam = document.getElementById("letszam");
+            const uzenet = document.getElementById("uzenet");
+            const aszf = document.getElementById("aszf");
+            const eredmeny = document.getElementById("foglalas-eredmeny");
+
+            // előző hibák, jelölések törlése
+            document.querySelectorAll(".hiba-uzenet").forEach(el => el.remove());
+            [nev, email, telefonszam, datum, ido, letszam, uzenet].forEach(mezo => {
+                mezo.classList.remove("mezo-hibas", "mezo-jo");
+            });
+            eredmeny.innerHTML = "";
+
+            function hiba(mezo, uzenetSzoveg) {
+                hibas = true;
+                mezo.classList.add("mezo-hibas");
+
+                const p = document.createElement("p");
+                p.className = "hiba-uzenet";
+                p.textContent = uzenetSzoveg;
+                mezo.after(p);
+            }
+
+            // Név
+            if (nev.value.trim().length < 3) {
+                hiba(nev, "A név minimum 3 karakter legyen.");
+            } else {
+                nev.classList.add("mezo-jo");
+            }
+
+            // Email
+            const emailMinta = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailMinta.test(email.value.trim())) {
+                hiba(email, "Kérjük, valós e-mail címet adj meg.");
+            } else {
+                email.classList.add("mezo-jo");
+            }
+
+            // Dátum
+            if (!datum.value) {
+                hiba(datum, "Kérjük, válassz dátumot.");
+            } else {
+                datum.classList.add("mezo-jo");
+            }
+
+            // Időpont
+            if (!ido.value) {
+                hiba(ido, "Kérjük, add meg az időpontot.");
+            } else {
+                ido.classList.add("mezo-jo");
+            }
+
+            // Létszám
+            const letszamErtek = parseInt(letszam.value, 10);
+            if (isNaN(letszamErtek) || letszamErtek < 1) {
+                hiba(letszam, "A létszám minimum 1 fő legyen.");
+            } else if (letszamErtek > 20) {
+                hiba(letszam, "Online max. 20 fő foglalható. Nagyobb társaság esetén kérjük, vedd fel velünk a kapcsolatot telefonon.");
+            } else {
+                letszam.classList.add("mezo-jo");
+            }
+
+            //  ÁSZF ellenőrzése:
+            if (!aszf.checked) {
+                hiba(aszf, "El kell fogadnod a felhasználási feltételeket.");
+            }
+
+            if (hibas) return;
+
+            eredmeny.innerHTML =
+                '<p class="siker-uzenet">Köszönjük! Foglalási igényedet rögzítettük. Hamarosan visszaigazoljuk e-mailben.</p>';
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
