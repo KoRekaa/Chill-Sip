@@ -805,7 +805,9 @@ body.gyik {
 
     /* Itallap  */
     .menu-item img {
-        height: 140px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
     }
 
     /* Rólunk oldal */
