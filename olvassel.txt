@@ -1,0 +1,39 @@
+Készítő neve:
+Kovács Réka
+
+A weboldal URL-je:
+https://korekaa.github.io/Chill-Sip/
+
+A weboldal rövid leírása:
+A Chill & Sip egy modern, barátságos kávézó bemutató weboldala, ahol a látogatók megismerhetik a kínálatot,
+a hely hangulatát és online asztalt is foglalhatnak. A weboldal reszponzív kialakítású és több interaktív elemet tartalmaz.
+
+A saját JavaScript kód helye és működése:
+- JavaScript/kave-kalkulator.js:
+  Ebben a fájlban található a kávékalkulátor működési logikája. Az Itallap oldalon
+  a felhasználó kiválaszthatja az ital típusát, méretét, tejfajtát, extrákat, a fogyasztási módot és latte artot.
+  A script ezek alapján kiszámítja a végösszeget, majd szöveges leírást is megjelenít.
+
+- JavaScript mappa:
+  A saját JavaScript fájlak külön mappában kaptak helyet a projekt áttekinthetősége érdekében.
+
+- asztalfoglalas.html beágyazott script:
+  Az oldal alján található JavaScript validálja az asztalfoglaló űrlapot. Ellenőrzi a név,
+  e-mail cím, dátum, időpont, létszám és az ÁSZF-mező helyes kitöltését. Hibás bevitel
+  esetén hibaüzenetet jelenít meg, sikeres kitöltéskor visszaigazolást ad a felhasználónak.
+
+A használt egyedi font és annak helye:
+- "Elms Sans" Google Font, a style.css elején importálva:
+  https://fonts.google.com/selection
+
+Felhasznált külső források:
+- Google Fonts (Elms Sans betűtípus)
+- A projekt készítése során a ChatGPT-t tanulási és útmutatási céllal vettem igénybe: segített egyes kódrészletek és struktúrák kialakításában.
+  A generált kódot átdolgoztam, megértettem, és az alkalmazott megoldások működését be tudom mutatni.
+
+Felhasznált képek forrásai:
+- A weboldalon szereplő képek egy része mesterséges intelligencia által generált tartalom (pl. dekorációs illusztrációk, díszítő elemek).
+  Ezeket a projekt céljaira hoztam létre, majd szükség szerint módosítottam (háttérszín, körbevágás, színkorrekció).
+
+- A képek másik részét az internetről gyűjtöttem referenciaként (pl. kávékról és sütikről készült fotók).
+  A letöltött képeket saját kezűleg szerkesztettem: háttérszín egységesítése, méretezés, formázás és a weboldal stílusához igazítás.
